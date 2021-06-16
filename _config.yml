@@ -1,11 +1,12 @@
 name: KDash
+title: "KDash"
 description: A fast and simple dashboard for Kubernetes
-title: "KDash | A fast and simple dashboard for Kubernetes"
-logo: "artwork/icon.png"
+logo: "/artwork/icon.png"
 theme: jekyll-theme-hacker
 show_downloads: "true"
 google_analytics: UA-199660143-1
 repository: https://github.com/kdash-rs/kdash
 github:
   url: https://github.com/kdash-rs/kdash
-  zip_url: https://github.com/kdash-rs/kdash/releases
+  repository: https://github.com/kdash-rs/kdash
+  tar_url: https://github.com/kdash-rs/kdash/releases/latest
