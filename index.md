@@ -1,20 +1,3 @@
-# KDash - A fast and simple dashboard for Kubernetes
-
-![ci](https://github.com/kdash-rs/kdash/actions/workflows/ci.yml/badge.svg)
-![cd](https://github.com/kdash-rs/kdash/actions/workflows/cd.yml/badge.svg)
-![Licence](https://img.shields.io/badge/license-MIT-blueviolet.svg)
-![LOC](https://tokei.rs/b1/github/kdash-rs/kdash?category=code)
-[![crates.io link](https://img.shields.io/crates/v/kdash.svg)](https://crates.io/crates/kdash)
-![Docker Release](https://img.shields.io/docker/v/deepu105/kdash?label=Docker%20version)
-![Release](https://img.shields.io/github/v/release/kdash-rs/kdash?color=%23c694ff)
-[![Coverage](https://coveralls.io/repos/github/kdash-rs/kdash/badge.svg?branch=main)](https://coveralls.io/github/kdash-rs/kdash?branch=main)
-
-<!-- [![GitHub Downloads](https://img.shields.io/github/downloads/kdash-rs/kdash/total.svg?label=GitHub%20downloads)](https://github.com/kdash-rs/kdash/releases)
-![Docker pulls](https://img.shields.io/docker/pulls/deepu105/kdash?label=Docker%20downloads)
-![Crate.io downloads](https://img.shields.io/crates/d/kdash?label=Crate%20downloads) -->
-
-[![Follow Deepu K Sasidharan (deepu105)](https://img.shields.io/twitter/follow/deepu105?label=Follow%20Deepu%20K%20Sasidharan%20%28deepu105%29&style=social)](https://twitter.com/intent/follow?screen_name=deepu105)
-
 ![logo](./artwork/logo.png)
 
 A simple terminal dashboard for Kubernetes built with Rust
@@ -211,4 +194,16 @@ MIT
 
 ## Authors
 
-- [Deepu K Sasidharan](https://deepu.tech/)
+[Deepu K Sasidharan](https://deepu.tech/) [![Follow Deepu K Sasidharan (deepu105)](https://img.shields.io/twitter/follow/deepu105?label=Follow%20Deepu%20K%20Sasidharan%20%28deepu105%29&style=social)](https://twitter.com/intent/follow?screen_name=deepu105)
+
+![ci](https://github.com/kdash-rs/kdash/actions/workflows/ci.yml/badge.svg)
+![cd](https://github.com/kdash-rs/kdash/actions/workflows/cd.yml/badge.svg)
+![Licence](https://img.shields.io/badge/license-MIT-blueviolet.svg)
+![LOC](https://tokei.rs/b1/github/kdash-rs/kdash?category=code)
+[![crates.io link](https://img.shields.io/crates/v/kdash.svg)](https://crates.io/crates/kdash)
+![Docker Release](https://img.shields.io/docker/v/deepu105/kdash?label=Docker%20version)
+![Release](https://img.shields.io/github/v/release/kdash-rs/kdash?color=%23c694ff)
+[![Coverage](https://coveralls.io/repos/github/kdash-rs/kdash/badge.svg?branch=main)](https://coveralls.io/github/kdash-rs/kdash?branch=main)
+[![GitHub Downloads](https://img.shields.io/github/downloads/kdash-rs/kdash/total.svg?label=GitHub%20downloads)](https://github.com/kdash-rs/kdash/releases)
+![Docker pulls](https://img.shields.io/docker/pulls/deepu105/kdash?label=Docker%20downloads)
+![Crate.io downloads](https://img.shields.io/crates/d/kdash?label=Crate%20downloads)
