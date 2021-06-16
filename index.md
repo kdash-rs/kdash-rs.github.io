@@ -1,8 +1,8 @@
-![logo](./artwork/logo.png)
+![logo](/artwork/logo.png)
 
 A simple terminal dashboard for Kubernetes built with Rust
 
-![UI](./screenshots/ui.gif)
+![UI](/screenshots/ui.gif)
 
 ## Installation
 
@@ -150,23 +150,23 @@ Press `?` while running the app to see keybindings
 
 ### Overview screen
 
-![UI](./screenshots/overview.png)
+![UI](/screenshots/overview.png)
 
 ### Container logs screen (light theme)
 
-![UI](./screenshots/logs.png)
+![UI](/screenshots/logs.png)
 
 ### Pod describe screen (light theme)
 
-![UI](./screenshots/describe.png)
+![UI](/screenshots/describe.png)
 
 ### Contexts screen
 
-![UI](./screenshots/contexts.png)
+![UI](/screenshots/contexts.png)
 
 ### Utilization screen
 
-![UI](./screenshots/utilization.png)
+![UI](/screenshots/utilization.png)
 
 ## Libraries used
 
