@@ -1,8 +1,8 @@
-![logo](/artwork/logo.png)
+![logo](artwork/logo.png)
 
 A simple terminal dashboard for Kubernetes built with Rust
 
-![UI](/screenshots/ui.gif)
+![UI](screenshots/ui.gif)
 
 ## Installation
 
@@ -39,18 +39,18 @@ Since validation of the package takes forever, it may take a long while to becom
 choco install kdash
 
 # Version number may be required for newer releases, if available:
-choco install kdash --version=0.1.0
+choco install kdash --version=0.2.7
 ```
 
 To upgrade
 
 ```bash
-choco upgrade kdash --version=0.1.0
+choco upgrade kdash --version=0.2.7
 ```
 
 ### Install script
 
-Run the below command to install the latest binary. Run with sudo if you dont have write access to /usr/local/bin. Else the script will install to current directory
+Run the below command to install the latest binary. Run with sudo if you don't have write access to /usr/local/bin. Else the script will install to current directory
 
 ```sh
 curl https://raw.githubusercontent.com/kdash-rs/kdash/main/deployment/getLatest.sh | bash
@@ -88,9 +88,13 @@ If you have Cargo installed then you install KDash from crates.io
 cargo install kdash
 ```
 
-You can also clone the repo and run `cargo run` or `make` to build and run the app
+> Note: On Debian/Ubuntu you might need to install `libxcb-xfixes0-dev` and `libxcb-shape0-dev`. On Fedora `libxcb` and `libxcb-devel` would be needed.
 
-**Note:**: On Linux you might need to have package `xorg-dev` (Debian/Ubuntu) or `xorg-x11-server-devel` (Fedora) or equivalent installed for the copy to clipboard features to work
+> Note: On Linux you might need to have package `xorg-dev` (Debian/Ubuntu) or `xorg-x11-server-devel` (Fedora) or equivalent installed for the copy to clipboard features to work
+
+> Note: If you are getting compilation error from openSSL. Make sure perl and perl-core are installed for your OS.
+
+You can also clone the repo and run `cargo run` or `make` to build and run the app
 
 ## USAGE:
 
@@ -132,23 +136,23 @@ Press `?` while running the app to see keybindings
 
 ### Overview screen
 
-![UI](/screenshots/overview.png)
+![UI](screenshots/overview.png)
 
 ### Container logs screen (light theme)
 
-![UI](/screenshots/logs.png)
+![UI](screenshots/logs.png)
 
 ### Pod describe screen (light theme)
 
-![UI](/screenshots/describe.png)
+![UI](screenshots/describe.png)
 
 ### Contexts screen
 
-![UI](/screenshots/contexts.png)
+![UI](screenshots/contexts.png)
 
 ### Utilization screen
 
-![UI](/screenshots/utilization.png)
+![UI](screenshots/utilization.png)
 
 ## Libraries used
 
@@ -174,7 +178,7 @@ At least for now there are no plans to add full CRUD for resources but we will a
 
 MIT
 
-## Authors
+## Creator
 
 [Deepu K Sasidharan](https://deepu.tech/) [![Follow Deepu K Sasidharan (deepu105)](https://img.shields.io/twitter/follow/deepu105?label=Follow%20Deepu%20K%20Sasidharan%20%28deepu105%29&style=social)](https://twitter.com/intent/follow?screen_name=deepu105)
 
