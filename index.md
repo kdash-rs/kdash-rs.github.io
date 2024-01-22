@@ -46,25 +46,43 @@ scoop install kdash
 
 ### Chocolatey (Windows)
 
-Choco package located [here](https://chocolatey.org/packages/kdash).
+Chocolatey package is located [here](https://chocolatey.org/packages/kdash).
 Since validation of the package takes forever, it may take a long while to become available after a release. I would recommend using Scoop instead for Windows.
 
 ```bash
 choco install kdash
 
 # Version number may be required for newer releases, if available:
-choco install kdash --version=0.2.7
+choco install kdash --version=0.4.3
 ```
 
 To upgrade
 
 ```bash
-choco upgrade kdash --version=0.2.7
+choco upgrade kdash --version=0.4.3
 ```
+
+### Cargo
+
+If you have Cargo installed then you install KDash from crates.io
+
+```bash
+cargo install kdash
+
+# if you face issues with k8s-openapi crate try the below
+cargo install --locked kdash
+```
+
+You can also clone the repo and run `cargo run` or `make` to build and run the app
+
+### Nix
+
+Try out kdash via `nix run nixpkgs#kdash` or add `kdash` to your
+`configuration.nix` for permanent installation.
 
 ### Install script
 
-Run the below command to install the latest binary. Run with sudo if you don't have write access to /usr/local/bin. Else the script will install to current directory
+Run the below command to install the latest binary. Run with sudo if you don't have write access to `/usr/local/bin`. Else the script will install to the current directory
 
 ```sh
 curl https://raw.githubusercontent.com/kdash-rs/kdash/main/deployment/getLatest.sh | bash
@@ -84,31 +102,25 @@ Binaries for macOS, Linux and Windows are available on the [releases](https://gi
 
 ### Docker
 
-Run KDash as a Docker container by mounting your `KUBECONFIG`. For example the below for default path
+Run KDash as a Docker container by mounting your `KUBECONFIG`. For example the below command for the default path
 
 ```bash
 docker run --rm -it -v ~/.kube/config:/root/.kube/config deepu105/kdash
+# If you want localhost access from the container
+docker run --network host --rm -it -v ~/.kube/config:/root/.kube/config deepu105/kdash
 ```
 
-You can also clone this repo and run `make docker` to build a docker image locally and run it using above command
+You can also clone this repo and run `make docker` to build a docker image locally and run it using the above command
+
+## Troubleshooting
 
 **Note**: This may not work properly if you run Kubernetes locally using Minikube or Kind
-
-### Cargo
-
-If you have Cargo installed then you install KDash from crates.io
-
-```bash
-cargo install kdash
-```
 
 > Note: On Debian/Ubuntu you might need to install `libxcb-xfixes0-dev` and `libxcb-shape0-dev`. On Fedora `libxcb` and `libxcb-devel` would be needed.
 
 > Note: On Linux you might need to have package `xorg-dev` (Debian/Ubuntu) or `xorg-x11-server-devel` (Fedora) or equivalent installed for the copy to clipboard features to work
 
 > Note: If you are getting compilation error from openSSL. Make sure perl and perl-core are installed for your OS.
-
-You can also clone the repo and run `cargo run` or `make` to build and run the app
 
 ## USAGE:
 
@@ -127,16 +139,19 @@ Press `?` while running the app to see keybindings
 
 ## Limitations/Known issues
 
-- [Windows] KDash looks better on CMD since Powershell's default theme makes the colours look weird.
-- [Windows] If using k3d for local clusters, set the server URL to 127.0.0.1 as 0.0.0.0 doesn't work with kube-rs. You can use `k3d cluster create --api-port 127.0.0.1:6550` or change the `cluster.server` value in your `.kube/config` for the k3d cluster to `127.0.0.1:<port>`
+- **[Linux/Docker]** Copy to clipboard feature is OS/arch dependent and might crash in some Linux distros and is not supported on `aarch64` and `arm` machines.
+- **[macOS]** KDash looks better on iTerm2 since macOS's default Terminal app makes the colors render weird.
+- **[Windows]** KDash looks better on CMD since Powershell's default theme makes the colors look weird.
+- **[Windows]** If using k3d for local clusters, set the server URL to 127.0.0.1 as 0.0.0.0 doesn't work with kube-rs. You can use `k3d cluster create --api-port 127.0.0.1:6550` or change the `cluster.server` value in your `.kube/config` for the k3d cluster to `127.0.0.1:<port>`.
 
 ## Features
 
-- CLI Info
+- CLI info
 - Node metrics
-- Resource Watch (configurable polling interval with `-p` flag)
-- Describe resources & copy output
-- Get YAML for resources & copy output
+- Resource watch (configurable polling interval with `-p` flag)
+- Custom resource definitions
+- Describe resources & copy the output
+- Get YAML for resources & copy the output
 - Stream container logs
 - Context
   - Context info
@@ -145,6 +160,8 @@ Press `?` while running the app to see keybindings
   - Context switch
 - Resources utilizations for nodes, pods and namespaces based on metrics server. Requires [metrics-server](https://kubernetes.io/docs/tasks/debug-application-cluster/resource-metrics-pipeline/#metrics-server) to be deployed on the cluster.
 - Dark/Light themes
+- Sensible keyboard shortcuts
+- Global glob filtering for resource names
 
 ## Screenshots
 
@@ -170,7 +187,7 @@ Press `?` while running the app to see keybindings
 
 ## Libraries used
 
-- [tui-rs](https://github.com/fdehau/tui-rs)
+- [ratatui](https://github.com/ratatui-org/ratatui)
 - [crossterm](https://github.com/crossterm-rs/crossterm)
 - [clap](https://github.com/clap-rs/clap)
 - [tokio](https://github.com/tokio-rs/tokio)
@@ -184,9 +201,9 @@ Press `?` while running the app to see keybindings
 
 [K9S](https://github.com/derailed/k9s) is a beast compared to this as it offers way more features including CRUD actions.
 
-KDash only offers a view of most used resources with a focus on speed and UX. Really, if something is slow or have bad UX then please raise a bug. Hence the UI/UX is designed to be more user friendly and easier to navigate with contextual help everywhere and a tab system to switch between different resources easily.
+KDash only offers a view of the resources with a focus on speed and UX. Really, if something is slow or has bad UX then please raise a bug. Hence the UI/UX is designed to be more user-friendly and easier to navigate with contextual help everywhere and a tab system to switch between different resources easily.
 
-At least for now there are no plans to add full CRUD for resources but we will add more resources and more useful actions
+At least for now, there are no plans to add full CRUD for resources but in the future, we might.
 
 ## Licence
 
