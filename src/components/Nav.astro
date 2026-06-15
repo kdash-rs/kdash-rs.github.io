@@ -1,0 +1,33 @@
+---
+import { VERSION } from "../data/version.ts";
+---
+
+<header class="sticky top-0 z-50 backdrop-blur bg-catppuccin-base/80 border-b border-catppuccin-surface0">
+  <nav class="mx-auto max-w-6xl flex items-center justify-between gap-3 px-4 sm:px-6 py-2">
+    <a href="/" class="flex min-w-0 items-center gap-2 sm:gap-3.5 font-mono text-xl sm:text-3xl text-catppuccin-text">
+      <img
+        src="/logo-nav.png"
+        alt=""
+        aria-hidden="true"
+        class="h-9 w-9 sm:h-12 sm:w-12 shrink-0 rounded-lg border border-catppuccin-surface0 bg-catppuccin-mantle p-0.5 object-contain"
+        width="44"
+        height="44"
+      />
+      <span class="font-semibold truncate">KDash</span>
+      <span class="hidden sm:inline text-catppuccin-overlay1 text-sm tracking-tight">v{VERSION}</span>
+    </a>
+    <div class="flex items-center gap-3 sm:gap-6 text-sm">
+      <a href="#install" class="hidden sm:inline text-catppuccin-subtext0 hover:text-catppuccin-text transition">Install</a>
+      <a href="#features" class="hidden sm:inline text-catppuccin-subtext0 hover:text-catppuccin-text transition">Features</a>
+      <a href="#screenshots" class="hidden md:inline text-catppuccin-subtext0 hover:text-catppuccin-text transition">Screenshots</a>
+      <a href="#faq" class="hidden md:inline text-catppuccin-subtext0 hover:text-catppuccin-text transition">FAQ</a>
+      <a
+        href="https://github.com/kdash-rs/kdash"
+        class="shrink-0 rounded-md border border-catppuccin-surface1 px-3 py-1.5 text-catppuccin-text hover:border-catppuccin-mauve hover:text-catppuccin-mauve transition"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
+    </div>
+  </nav>
+</header>

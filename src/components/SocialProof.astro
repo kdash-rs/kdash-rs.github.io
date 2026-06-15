@@ -1,0 +1,46 @@
+---
+import { fetchGithubStats } from "../integrations/github-stats.ts";
+
+const stats = await fetchGithubStats();
+
+const cards: Array<{ value: string; label: string; href?: string }> = [];
+
+if (stats.stars !== null && stats.stars >= 5) {
+  cards.push({
+    value: stats.stars.toLocaleString("en-US"),
+    label: "GitHub stars",
+    href: "https://github.com/kdash-rs/kdash/stargazers",
+  });
+}
+if (stats.contributors !== null && stats.contributors >= 1) {
+  cards.push({
+    value: stats.contributors.toLocaleString("en-US"),
+    label: "Contributors",
+    href: "https://github.com/kdash-rs/kdash/graphs/contributors",
+  });
+}
+cards.push({
+  value: "MIT",
+  label: "License",
+  href: "https://github.com/kdash-rs/kdash/blob/main/LICENSE",
+});
+---
+
+{cards.length > 0 && (
+  <section class="border-t border-catppuccin-surface0">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <div class={`grid gap-6 ${cards.length === 1 ? "max-w-md mx-auto" : cards.length === 2 ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
+        {cards.map((card) => (
+          <a
+            href={card.href}
+            rel="noopener noreferrer"
+            class="block rounded-lg border border-catppuccin-surface0 bg-catppuccin-mantle px-6 py-8 text-center hover:border-catppuccin-mauve transition"
+          >
+            <p class="font-mono text-4xl font-semibold text-catppuccin-mauve">{card.value}</p>
+            <p class="mt-2 text-sm uppercase tracking-widest text-catppuccin-overlay1">{card.label}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

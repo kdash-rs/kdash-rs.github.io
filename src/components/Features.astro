@@ -1,0 +1,54 @@
+---
+import { features } from "../data/features.ts";
+
+const accentClass: Record<string, string> = {
+  mauve: "bg-catppuccin-mauve/10 text-catppuccin-mauve",
+  blue: "bg-catppuccin-blue/10 text-catppuccin-blue",
+  green: "bg-catppuccin-green/10 text-catppuccin-green",
+  peach: "bg-catppuccin-peach/10 text-catppuccin-peach",
+  yellow: "bg-catppuccin-yellow/10 text-catppuccin-yellow",
+  teal: "bg-catppuccin-teal/10 text-catppuccin-teal",
+  sky: "bg-catppuccin-sky/10 text-catppuccin-sky",
+  lavender: "bg-catppuccin-lavender/10 text-catppuccin-lavender",
+};
+
+function splitInlineCode(text: string) {
+  return text.split(/(`[^`]+`)/g).filter(Boolean);
+}
+---
+
+<section id="features" class="border-t border-catppuccin-surface0 bg-catppuccin-mantle/40">
+  <div class="mx-auto max-w-6xl px-6 py-24">
+    <div class="max-w-2xl mb-14">
+      <p class="font-mono text-xs uppercase tracking-widest text-catppuccin-mauve mb-3">Features</p>
+      <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-catppuccin-text">
+        Watch your cluster, and act on it.
+      </h2>
+      <p class="mt-4 text-catppuccin-subtext1">
+        KDash gives you a fast, keyboard-driven view of Kubernetes resources, plus the common management actions you reach for. Every impactful change is guarded by a confirmation prompt, with contextual help on every screen.
+      </p>
+    </div>
+
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((f) => (
+        <li class="rounded-lg border border-catppuccin-surface0 bg-catppuccin-base p-6 hover:border-catppuccin-surface1 transition">
+          <span class={`inline-flex h-9 w-9 items-center justify-center rounded-md font-mono text-base ${accentClass[f.accent]}`}>
+            ✓
+          </span>
+          <h3 class="mt-4 text-lg font-semibold text-catppuccin-text">{f.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-catppuccin-subtext1">
+            {splitInlineCode(f.body).map((part) =>
+              part.startsWith("`") && part.endsWith("`") ? (
+                <code class="rounded bg-catppuccin-mantle px-1.5 py-0.5 font-mono text-[0.9em] text-catppuccin-text">
+                  {part.slice(1, -1)}
+                </code>
+              ) : (
+                part
+              ),
+            )}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

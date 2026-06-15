@@ -1,0 +1,56 @@
+---
+import { VERSION } from "../data/version.ts";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-catppuccin-surface0 bg-catppuccin-crust">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+    >
+      <div
+        class="flex items-center gap-2 font-mono text-sm text-catppuccin-subtext0"
+      >
+        <span class="inline-block h-2 w-2 rounded-full bg-catppuccin-mauve"
+        ></span>
+        <span class="text-catppuccin-text font-semibold">KDash</span>
+        <span class="text-catppuccin-overlay1">v{VERSION}</span>
+      </div>
+      <div
+        class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-catppuccin-subtext0"
+      >
+        <a
+          class="hover:text-catppuccin-text transition"
+          href="https://github.com/kdash-rs/kdash">Source</a
+        >
+        <a
+          class="hover:text-catppuccin-text transition"
+          href="https://github.com/kdash-rs/kdash/releases">Releases</a
+        >
+        <a
+          class="hover:text-catppuccin-text transition"
+          href="https://github.com/kdash-rs/kdash/issues">Issues</a
+        >
+        <a
+          class="hover:text-catppuccin-text transition"
+          href="https://github.com/kdash-rs/kdash/blob/main/CHANGELOG.md"
+          >Changelog</a
+        >
+        <a
+          class="hover:text-catppuccin-text transition"
+          href="https://github.com/kdash-rs/kdash/blob/main/LICENSE">MIT</a
+        >
+      </div>
+    </div>
+    <p class="mt-8 text-xs text-catppuccin-overlay1">
+      © {year} KDash contributors · Created by <a
+        class="underline hover:text-catppuccin-text"
+        href="https://deepu.tech/">Deepu K Sasidharan</a
+      > · Built with Astro + Tailwind · Theme: <a
+        class="underline hover:text-catppuccin-text"
+        href="https://catppuccin.com/palette">Catppuccin Macchiato</a
+      >
+    </p>
+  </div>
+</footer>

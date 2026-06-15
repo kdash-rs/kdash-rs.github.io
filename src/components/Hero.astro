@@ -1,0 +1,148 @@
+---
+import InstallTabs from "./InstallTabs.astro";
+---
+
+<section
+  id="install"
+  class="relative mx-auto max-w-6xl px-6 pt-20 pb-24 sm:pt-28 sm:pb-32"
+>
+  <div class="grid lg:grid-cols-12 gap-8 lg:gap-8 items-start">
+    <div class="lg:col-span-6 xl:col-span-6">
+      <p
+        class="font-mono text-sm uppercase tracking-widest text-catppuccin-mauve mb-4"
+      >
+        Kubernetes · TUI · kube-rs · Rust
+      </p>
+      <h1
+        class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05] text-catppuccin-text"
+      >
+        A fast, simple dashboard <span class="text-catppuccin-mauve"
+          >for Kubernetes</span
+        >.
+      </h1>
+      <p
+        class="mt-6 text-lg leading-relaxed text-catppuccin-subtext1 max-w-2xl"
+      >
+        Watch and manage your cluster from a keyboard-driven terminal UI,
+        without leaving the shell to run kubectl.
+      </p>
+
+      <div
+        class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-catppuccin-overlay1 font-mono"
+      >
+        <span class="flex items-center gap-1.5"
+          ><span
+            class="inline-block h-1.5 w-1.5 rounded-full bg-catppuccin-green"
+          ></span> resource watch</span
+        >
+        <span class="flex items-center gap-1.5"
+          ><span
+            class="inline-block h-1.5 w-1.5 rounded-full bg-catppuccin-green"
+          ></span> action menu</span
+        >
+        <span class="flex items-center gap-1.5"
+          ><span
+            class="inline-block h-1.5 w-1.5 rounded-full bg-catppuccin-green"
+          ></span> port-forward</span
+        >
+        <span class="flex items-center gap-1.5"
+          ><span
+            class="inline-block h-1.5 w-1.5 rounded-full bg-catppuccin-green"
+          ></span> metrics</span
+        >
+      </div>
+    </div>
+
+    <div class="lg:col-span-6 xl:col-span-6 w-full self-start lg:pt-2">
+      <InstallTabs />
+    </div>
+  </div>
+
+  <div class="mt-14 lg:mt-18 mx-auto max-w-4xl">
+    <div
+      class="rounded-lg overflow-hidden border border-catppuccin-surface0 bg-catppuccin-mantle shadow-xl shadow-black/40"
+    >
+      <div
+        class="flex items-center gap-1.5 px-3 py-2 border-b border-catppuccin-surface0 bg-catppuccin-crust"
+      >
+        <span class="inline-block h-2.5 w-2.5 rounded-full bg-catppuccin-red"
+        ></span>
+        <span class="inline-block h-2.5 w-2.5 rounded-full bg-catppuccin-yellow"
+        ></span>
+        <div class="inline-block h-2.5 w-2.5 rounded-full bg-catppuccin-green">
+        </div>
+        <span class="ml-2 text-xs font-mono text-catppuccin-overlay1"
+          >kdash</span
+        >
+      </div>
+      <div class="bg-catppuccin-mantle">
+        <!-- asciinema-player mounts here and sets its own height (fit: width),
+             so the frame hugs the cast with no empty strip below it. -->
+        <div
+          id="demo-cast-container"
+          class="demo-asciinema w-full bg-catppuccin-mantle"
+        >
+        </div>
+        <!-- Shown until the player mounts, and the only fallback for no-JS or
+             reduced-motion. Hidden by the script once the cast is playing. -->
+        <img
+          src="/screenshots/overview.png"
+          alt="KDash terminal dashboard showing the cluster overview"
+          id="demo-static-image"
+          class="demo-static block w-full bg-catppuccin-mantle"
+          width="1281"
+          height="608"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <p class="mt-3 text-center text-xs text-catppuccin-overlay1">
+      Recorded session · auto-loops · reduced motion swaps to a static image
+    </p>
+  </div>
+</section>
+
+<script>
+  // Lazy-load asciinema-player only when the cast container is in view and
+  // the user hasn't requested reduced motion. The component is the largest
+  // single JS payload on the page; deferring keeps first paint snappy.
+  const container = document.getElementById("demo-cast-container");
+  const fallback = document.getElementById("demo-static-image");
+  if (
+    container &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    const load = async () => {
+      const player = await import("asciinema-player");
+      await import("asciinema-player/dist/bundle/asciinema-player.css");
+      player.create("/ui.cast", container, {
+        cols: 150,
+        rows: 30,
+        loop: true,
+        autoPlay: true,
+        speed: 1,
+        idleTimeLimit: 1.5,
+        fit: "width",
+        theme: "catppuccin-macchiato",
+        poster: "npt:0:00",
+        controls: false,
+      });
+
+      if (fallback) {
+        fallback.style.display = "none";
+      }
+    };
+
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          load().catch(() => {
+            // Fall back silently to the static image (already in the DOM).
+          });
+        }
+      });
+    });
+    io.observe(container);
+  }
+</script>

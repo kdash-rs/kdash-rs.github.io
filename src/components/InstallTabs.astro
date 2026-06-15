@@ -1,0 +1,186 @@
+---
+// Install methods. WAI-ARIA tablist semantics so arrow-key navigation
+// works for keyboard users. The tab-switch and localStorage persistence live
+// in the inline client script at the bottom — Astro static + a tiny island.
+
+const tabs = [
+  {
+    id: "brew",
+    label: "Homebrew",
+    cmd: `brew install kdash-rs/kdash/kdash`,
+  },
+  {
+    id: "scoop",
+    label: "Scoop",
+    cmd: `scoop bucket add kdash-bucket https://github.com/kdash-rs/scoop-kdash; scoop install kdash`,
+  },
+  { id: "cargo", label: "Cargo", cmd: `cargo install kdash` },
+  { id: "nix", label: "Nix", cmd: `nix run nixpkgs#kdash` },
+  {
+    id: "script",
+    label: "Script",
+    cmd: `curl https://raw.githubusercontent.com/kdash-rs/kdash/main/deployment/getLatest.sh | bash`,
+  },
+  {
+    id: "docker",
+    label: "Docker",
+    cmd: `docker run --rm -it -v ~/.kube/config:/root/.kube/config deepu105/kdash`,
+  },
+];
+---
+
+<div class="not-prose w-full max-w-2xl">
+  <div
+    role="tablist"
+    aria-label="Install methods"
+    class="flex flex-wrap gap-1 border-b border-catppuccin-surface0 mb-3"
+  >
+    {
+      tabs.map((tab, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`tab-${tab.id}`}
+          aria-controls={`panel-${tab.id}`}
+          aria-selected={i === 0 ? "true" : "false"}
+          tabindex={i === 0 ? 0 : -1}
+          data-tab={tab.id}
+          class="px-4 py-2 -mb-px border-b-2 border-transparent text-sm font-medium text-catppuccin-subtext0 hover:text-catppuccin-text aria-selected:border-catppuccin-mauve aria-selected:text-catppuccin-text transition"
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    tabs.map((tab, i) => (
+      <div
+        role="tabpanel"
+        id={`panel-${tab.id}`}
+        aria-labelledby={`tab-${tab.id}`}
+        hidden={i !== 0}
+        data-panel={tab.id}
+      >
+        <div class="group flex items-center justify-between gap-3 rounded-md bg-catppuccin-mantle border border-catppuccin-surface0 px-4 py-3 font-mono text-sm">
+          <code class="min-w-0 flex-1 text-catppuccin-text whitespace-pre-wrap break-all">
+            {tab.cmd}
+          </code>
+          <button
+            type="button"
+            data-copy={tab.cmd}
+            aria-label={`Copy ${tab.label} command`}
+            class="ml-3 shrink-0 rounded border border-catppuccin-surface1 px-2 py-1 text-xs text-catppuccin-subtext0 hover:text-catppuccin-text hover:border-catppuccin-mauve transition opacity-0 group-hover:opacity-100 focus:opacity-100"
+          >
+            copy
+          </button>
+        </div>
+      </div>
+    ))
+  }
+
+  <div
+    class="mt-4 rounded-md border border-catppuccin-surface0 bg-catppuccin-crust/70 px-4 py-4"
+  >
+    <p
+      class="font-mono text-[11px] uppercase tracking-[0.2em] text-catppuccin-overlay1"
+    >
+      Next step
+    </p>
+    <div
+      class="mt-2 group flex items-center justify-between gap-3 rounded-md bg-catppuccin-mantle border border-catppuccin-surface0 px-4 py-3 font-mono text-sm"
+    >
+      <code
+        class="min-w-0 flex-1 text-catppuccin-text whitespace-pre-wrap break-all"
+        >kdash</code
+      >
+      <button
+        type="button"
+        data-copy="kdash"
+        aria-label="Copy kdash command"
+        class="ml-3 shrink-0 rounded border border-catppuccin-surface1 px-2 py-1 text-xs text-catppuccin-subtext0 hover:text-catppuccin-text hover:border-catppuccin-mauve transition opacity-0 group-hover:opacity-100 focus:opacity-100"
+      >
+        copy
+      </button>
+    </div>
+  </div>
+  <p class="mt-3 text-xs leading-relaxed text-catppuccin-overlay1">
+    KDash uses your current <code class="font-mono text-catppuccin-text"
+      >kubeconfig</code
+    > and context. Press <code class="font-mono text-catppuccin-text">?</code> in
+    the app for keybindings.
+  </p>
+</div>
+
+<script>
+  // Tab switching with localStorage persistence + arrow-key navigation.
+  const STORAGE_KEY = "preferred-install";
+  const tablists = document.querySelectorAll<HTMLElement>('[role="tablist"]');
+
+  tablists.forEach((tablist) => {
+    const tabs = Array.from(
+      tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
+    );
+    const panels = new Map<string, HTMLElement>();
+    tabs.forEach((t) => {
+      const id = t.dataset.tab!;
+      const panel = document.querySelector<HTMLElement>(`[data-panel="${id}"]`);
+      if (panel) panels.set(id, panel);
+    });
+
+    function activate(id: string) {
+      tabs.forEach((t) => {
+        const selected = t.dataset.tab === id;
+        t.setAttribute("aria-selected", String(selected));
+        t.tabIndex = selected ? 0 : -1;
+        if (selected) t.focus({ preventScroll: true });
+      });
+      panels.forEach((panel, panelId) => {
+        panel.hidden = panelId !== id;
+      });
+      try {
+        localStorage.setItem(STORAGE_KEY, id);
+      } catch {}
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener("click", () => activate(tab.dataset.tab!));
+      tab.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          const dir = event.key === "ArrowRight" ? 1 : -1;
+          const next = tabs[(idx + dir + tabs.length) % tabs.length];
+          activate(next.dataset.tab!);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          activate(tabs[0].dataset.tab!);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          activate(tabs[tabs.length - 1].dataset.tab!);
+        }
+      });
+    });
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && panels.has(saved)) activate(saved);
+    } catch {}
+  });
+
+  // Copy-to-clipboard for the visible command.
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const text = btn.dataset.copy ?? "";
+      try {
+        await navigator.clipboard.writeText(text);
+        const orig = btn.textContent;
+        btn.textContent = "copied";
+        setTimeout(() => {
+          btn.textContent = orig;
+        }, 1200);
+      } catch {
+        // Clipboard API blocked (file://, insecure context); fall back silently.
+      }
+    });
+  });
+</script>

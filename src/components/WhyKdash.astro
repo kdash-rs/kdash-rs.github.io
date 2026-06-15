@@ -1,0 +1,65 @@
+---
+const points = [
+  {
+    title: "Fast and lightweight",
+    body: "Built in Rust on ratatui and kube-rs. Quick startup, low overhead, and snappy navigation, with resource watch keeping the view current as the cluster changes.",
+  },
+  {
+    title: "Keyboard-driven",
+    body: "A tab system to jump between resource types, vim-style movement keys, and contextual help on every screen. Press ? anywhere to see the keybindings.",
+  },
+  {
+    title: "Read and act in one place",
+    body: "See resources and run the common actions without leaving the dashboard: delete, edit, scale, rollout restart, cordon, manage CronJobs, and port-forward, each with a confirmation prompt.",
+  },
+  {
+    title: "Works with your kubeconfig",
+    body: "Switch contexts and namespaces live. KDash watches your kubeconfig and keeps context and namespace state in sync without a restart.",
+  },
+];
+---
+
+<section
+  id="why-kdash"
+  class="border-t border-catppuccin-surface0 bg-catppuccin-mantle/40"
+>
+  <div class="mx-auto max-w-6xl px-6 py-24">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <div>
+        <p
+          class="font-mono text-xs uppercase tracking-widest text-catppuccin-green mb-3"
+        >
+          Why KDash
+        </p>
+        <h2
+          class="text-3xl sm:text-4xl font-semibold tracking-tight text-catppuccin-text"
+        >
+          Speed and good UX, by design.
+        </h2>
+        <p class="mt-6 text-catppuccin-subtext1 leading-relaxed">
+          KDash is for people who live in the terminal and want a clear, fast
+          window into Kubernetes. No heavy GUI, and no reaching for long kubectl
+          commands for the things you do all day.
+        </p>
+        <p class="mt-4 text-catppuccin-subtext1 leading-relaxed">
+          It stays focused: browse resources, read logs and describe output,
+          check utilization, and run the common management actions, all from a
+          layout that is quick to learn and quick to drive.
+        </p>
+      </div>
+
+      <ul class="space-y-6">
+        {
+          points.map((p) => (
+            <li class="rounded-lg border border-catppuccin-surface0 bg-catppuccin-base p-6">
+              <h3 class="font-semibold text-catppuccin-text">{p.title}</h3>
+              <p class="mt-2 text-sm text-catppuccin-subtext1 leading-relaxed">
+                {p.body}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

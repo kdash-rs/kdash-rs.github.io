@@ -1,0 +1,73 @@
+---
+const shots = [
+  {
+    src: "/screenshots/overview.png",
+    title: "Overview",
+    caption: "Tabbed resource view with namespaces, context, and CLI info.",
+  },
+  {
+    src: "/screenshots/logs.png",
+    title: "Container logs",
+    caption: "Live log streaming with timestamp and line-wrap toggles.",
+  },
+  {
+    src: "/screenshots/describe.png",
+    title: "Describe",
+    caption: "Describe any resource with syntax highlighting and copy.",
+  },
+  {
+    src: "/screenshots/utilization.png",
+    title: "Utilization",
+    caption: "Node, pod, and namespace metrics with a cluster summary.",
+  },
+];
+---
+
+<section id="screenshots" class="border-t border-catppuccin-surface0">
+  <div class="mx-auto max-w-6xl px-6 py-24">
+    <div class="max-w-2xl mb-14">
+      <p
+        class="font-mono text-xs uppercase tracking-widest text-catppuccin-mauve mb-3"
+      >
+        Screenshots
+      </p>
+      <h2
+        class="text-3xl sm:text-4xl font-semibold tracking-tight text-catppuccin-text"
+      >
+        A look around the dashboard.
+      </h2>
+      <p class="mt-4 text-catppuccin-subtext1">
+        Every view shares one Catppuccin Macchiato palette, the same theme KDash
+        ships by default in the terminal.
+      </p>
+    </div>
+
+    <ul class="grid sm:grid-cols-2 gap-6">
+      {
+        shots.map((shot) => (
+          <li class="rounded-lg overflow-hidden border border-catppuccin-surface0 bg-catppuccin-mantle">
+            <div class="flex items-center gap-1.5 px-3 py-2 border-b border-catppuccin-surface0 bg-catppuccin-crust">
+              <span class="inline-block h-2.5 w-2.5 rounded-full bg-catppuccin-red" />
+              <span class="inline-block h-2.5 w-2.5 rounded-full bg-catppuccin-yellow" />
+              <span class="inline-block h-2.5 w-2.5 rounded-full bg-catppuccin-green" />
+              <span class="ml-2 text-xs font-mono text-catppuccin-overlay1">
+                kdash · {shot.title}
+              </span>
+            </div>
+            <img
+              src={shot.src}
+              alt={`KDash ${shot.title} screen`}
+              class="w-full aspect-[1281/608] object-cover object-top bg-catppuccin-mantle"
+              width="1281"
+              height="608"
+              loading="lazy"
+            />
+            <p class="px-4 py-3 text-sm text-catppuccin-subtext1 border-t border-catppuccin-surface0">
+              {shot.caption}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

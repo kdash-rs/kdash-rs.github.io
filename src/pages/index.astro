@@ -1,0 +1,28 @@
+---
+// Single landing page composed of section components, each in its own file.
+
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Features from "../components/Features.astro";
+import SocialProof from "../components/SocialProof.astro";
+import Screenshots from "../components/Screenshots.astro";
+import WhyKdash from "../components/WhyKdash.astro";
+import Sponsors from "../components/Sponsors.astro";
+import Faq from "../components/Faq.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base>
+  <Nav />
+  <main class="mx-auto w-full">
+    <Hero />
+    <Features />
+    <SocialProof />
+    <Screenshots />
+    <WhyKdash />
+    <Sponsors />
+    <Faq />
+  </main>
+  <Footer />
+</Base>
