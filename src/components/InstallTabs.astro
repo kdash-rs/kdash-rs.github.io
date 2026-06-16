@@ -5,9 +5,24 @@
 
 const tabs = [
   {
+    id: "curl",
+    label: "Script",
+    cmd: `curl -fsSL https://kdash.cli.rs/install.sh | sh`,
+  },
+  {
     id: "brew",
     label: "Homebrew",
     cmd: `brew install kdash-rs/kdash/kdash`,
+  },
+  {
+    id: "aur",
+    label: "AUR",
+    cmd: `yay -S kdash-bin`,
+  },
+  {
+    id: "windows",
+    label: "Windows",
+    cmd: `irm https://kdash.cli.rs/install.ps1 | iex`,
   },
   {
     id: "scoop",
@@ -16,11 +31,6 @@ const tabs = [
   },
   { id: "cargo", label: "Cargo", cmd: `cargo install kdash` },
   { id: "nix", label: "Nix", cmd: `nix run nixpkgs#kdash` },
-  {
-    id: "script",
-    label: "Script",
-    cmd: `curl https://raw.githubusercontent.com/kdash-rs/kdash/main/deployment/getLatest.sh | bash`,
-  },
   {
     id: "docker",
     label: "Docker",

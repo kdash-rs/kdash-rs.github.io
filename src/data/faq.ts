@@ -17,7 +17,7 @@ export const faq: FaqEntry[] = [
   },
   {
     q: "What platforms does it support?",
-    a: "macOS (x86_64, arm64), Linux GNU and MUSL (x86_64, armv6, armv7, aarch64), and Windows (x86_64, aarch64). Prebuilt binaries are on the releases page, with installers for Homebrew, Scoop, Chocolatey, Cargo, Nix, and Docker.",
+    a: "macOS (x86_64, arm64), Linux GNU and MUSL (x86_64, armv6, armv7, aarch64), and Windows (x86_64, aarch64). Prebuilt binaries are on the releases page, plus a one-line install script (curl | sh, or irm | iex on Windows) and installers for Homebrew, the AUR, Scoop, Chocolatey, Cargo, Nix, and Docker.",
   },
   {
     q: "Do I need kubectl or anything else?",
