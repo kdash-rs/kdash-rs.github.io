@@ -1,3 +1,5 @@
+# Source: github.com/kdash-rs/kdash@main/scripts/install.sh
+# SHA-256 verified by .github/workflows/publish-site-manual.yml on 2026-06-16.
 #!/bin/sh
 #
 # install.sh — install kdash from GitHub Releases.

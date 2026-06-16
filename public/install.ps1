@@ -1,3 +1,5 @@
+# Source: github.com/kdash-rs/kdash@main/scripts/install.ps1
+# SHA-256 verified by .github/workflows/publish-site-manual.yml on 2026-06-16.
 # install.ps1 — install kdash from GitHub Releases on Windows.
 #
 # Usage:
